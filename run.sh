@@ -42,12 +42,17 @@ updt(){
     if [[ -e ${1}/.AutoPlotter ]] ; then
 
         if [[ -e ${1}/pdfs ]] ; then
+
+            rm -r ${1}/pdfs ${1}/pngs
+            mkdir ${1}/pdfs ${1}/pngs
             
             for file in ${2}/*.pdf ; do
                 cp ${file} ${1}/pdfs
             done
             
             pdf_to_png ${1}/pdfs ${1}/pngs
+            chmod -R 755 ${1}/pdfs
+            chmod -R 755 ${1}/pngs
             chmod -R 755 ${1}
 
             exit 0
