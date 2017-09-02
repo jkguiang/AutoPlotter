@@ -1,4 +1,4 @@
-#AutoPlotter
+# AutoPlotter
 There are a lot of other plotters out there, but our reviews speak for themselves: AutoPlotter is the new craze! Clone this repository to start using AutoPlotter today! _AutoPlotter: Simple, stunning, smart._
 
 Example: http://uaf-8.t2.ucsd.edu/~jguiang/AutoPlotter
