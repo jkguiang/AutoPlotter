@@ -8,8 +8,8 @@ Example: http://uaf-8.t2.ucsd.edu/~jguiang/AutoPlotter
     * If your page is too crowded, just set the slider to 0 to get a handy, still searchable list of your files
 
 ## Reviews:
-###### Jonathan Guiang
 > It's way better than Niceplots.
+######              Jonathan Guiang
 
-###### New York Times
 > AutoPlotter is so easy to use, every experimental physicist should be using this!
+###### New York Times
