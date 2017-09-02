@@ -186,12 +186,12 @@
                     if (input == "") {
                         window.location.hash = "";
                     }
-                    var search = input.value.toLowerCase();
+                    var search = input.value;
                     window.location.hash = search;
                 }
                 indexMap["search"] = search;
                 for (var i = 0; i < data.length; i++) {
-                    if (data[i]["name"].toLowerCase().indexOf(search) < 0) {
+                    if (data[i]["name"].indexOf(search) < 0) {
                         data[i]["hidden"] = true;
                     }
                 }
