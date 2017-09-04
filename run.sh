@@ -26,6 +26,7 @@ setup(){
         mkdir ${1}/${2}
         mkdir ${1}/${2}/pdfs
         mkdir ${1}/${2}/pngs
+        mkdir ${1}/${2}/txts
         cp index.php ${1}/${2}
         touch ${1}/${2}/.AutoPlotter
         
@@ -43,16 +44,20 @@ updt(){
 
         if [[ -e ${1}/pdfs ]] ; then
 
-            rm -r ${1}/pdfs ${1}/pngs
-            mkdir ${1}/pdfs ${1}/pngs
+            rm -rf ${1}/pdfs ${1}/pngs ${1}/txts
             
             for file in ${2}/*.pdf ; do
                 cp ${file} ${1}/pdfs
+            done
+
+            for file in ${2}/*.txt ; do
+                cp ${file} ${1}/txts
             done
             
             pdf_to_png ${1}/pdfs ${1}/pngs
             chmod -R 755 ${1}/pdfs
             chmod -R 755 ${1}/pngs
+            chmod -R 755 ${1}/txts
             chmod -R 755 ${1}
 
             exit 0
