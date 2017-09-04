@@ -30,7 +30,7 @@
                 margin-bottom: 0px;
                 opacity: 0.2;
                 color: #fff;
-                background: #fff url("") no-repeat center center;
+                background: #fff url("") no-repeat center top;
                 background-color: #ffffff !important;
                 background-size: contain !important;
 
@@ -53,6 +53,10 @@
                 overflow: hidden;
                 width: 115%;
             }
+            
+            .tooltip-txt {
+                white-space: pre;
+            }
 
         </style>
 
@@ -61,11 +65,12 @@
 
             $images = array();
 
-            function newImage($new_png, $new_pdf, $new_width, $new_height) {
+            function newImage($new_png, $new_pdf, $new_txt, $new_width, $new_height) {
                 global $images;
                 $new_image = array(
                     "png_path" => $new_png,
                     "pdf_path" => $new_pdf,
+                    "txt_path" => $new_txt,
                     "width" => $new_width,
                     "height" => $new_height,
                 );
@@ -76,17 +81,30 @@
 
             $cwd = getcwd();
 
-            $png_path = ("pngs/");
             $pdf_path = ("pdfs/");
+            $png_path = ("pngs/");
+            $txt_path = ("txts/");
 
-            $pngs = scandir($cwd . "/" . $png_path);
             $pdfs = scandir($cwd . "/" . $pdf_path);
+            $pngs = scandir($cwd . "/" . $png_path);
+            $txts = scandir($cwd . "/" . $txt_path);
+
             
             // Fill JSON
+            $txt_offset = 0;
             for ($i = 0; $i < count($pngs); $i++) {
+                $png_name = explode(".", $pngs[$i]);
+                $pdf_name = explode(".", $pdfs[$i]);
+                $txt_name = explode(".", $txts[$i - $txt_offset]);
+                if ($png_name[0] != $pdf_name[0]) continue;
                 if ($pngs[$i] == '.' || $pngs[$i] == '..') continue;
                 list($width, $height) = getimagesize($cwd . "/" . $png_path . "/" . $pngs[$i]);
-                newImage($png_path . $pngs[$i], $pdf_path . $pdfs[$i], $width, $height);
+                if ($png_name[0] != $txt_name[0]) {
+                    newImage($png_path . $pngs[$i], $pdf_path . $pdfs[$i], "None", $width, $height);
+                    $txt_offset++;
+                    continue;
+                }
+                newImage($png_path . $pngs[$i], $pdf_path . $pdfs[$i], $txt_path . $txts[$i - $txt_offset], $width, $height);
             }
 
         ?>
@@ -109,7 +127,18 @@
                 fill_sections(data);
                 $('[id^=img_]').mouseenter(
                     function() {
-                        $("#well").css("background","#000 url('"+$(this).attr("src")+"') no-repeat center center");
+                        // Dynamic Well Preview
+                        $("#preview").attr("src", $(this).attr("src"));
+
+                        // Dynamic Well Tooltip
+                        new_txt = data[Number($(this).attr('id').split("_")[1])]["txt_path"];
+                        if (new_txt != "None"){
+                            $("#tooltip").show();
+                            $("#tooltip").load(new_txt);
+                        }
+                        else {
+                            $("#tooltip").hide();
+                        }
                     } 
                 );
 
@@ -139,6 +168,7 @@
                     var img_obj = php_out[i];
                     var png_path = img_obj["png_path"];
                     var pdf_path = img_obj["pdf_path"];
+                    var txt_path = img_obj["txt_path"];
                     var width = img_obj["width"];
                     var height = img_obj["height"];
                     var name = png_path.split('/').reverse()[0].split('.')[0];
@@ -152,6 +182,7 @@
                         "name": name,
                         "png_path": png_path,
                         "pdf_path": pdf_path,
+                        "txt_path": txt_path,
                         "width": indexMap["thumbnails"]["width"],
                         "height": indexMap["thumbnails"]["height"],
                         "hidden": false,
@@ -227,13 +258,15 @@
                 var counter = 0;
                 var new_search = "";
 
+                var true_count = 0;
                 for (var i = 0; i < data.length; i++) {
                     if (data[i]["hidden"]) {
+                        true_count++;
                         continue;
                     }
 
                     var new_split = "";
-                    var new_name = "";
+                    var html_name = "";
 
                     if (indexMap["search"] != "") {
                         new_search = indexMap["search"];
@@ -242,20 +275,21 @@
 
                         for (var j = 0; j < new_split.length; j++) {
                             new_name += new_split[j];
-
-                            if (data[i]["name"].indexOf(new_name + new_search) != -1){
-                                new_name += "<font class='bg-success'>"+new_search+"</font>";
+                            html_name += new_split[j];
+                            if (data[i]["name"].indexOf(new_name + new_search) != -1) {
+                                new_name += new_search;
+                                html_name += "<font class='bg-success'>"+new_search+"</font>";
                             }
                         }
                     }
 
                     else {
-                        new_name = data[i]["name"];
+                        html_name = data[i]["name"];
                     }
 
 
-                    $("#grid_" + counter).append("<h4>"+new_name+"</h4><a href="+data[i]["pdf_path"]+"><img id=img_"+counter+" src="+data[i]["png_path"]+
-                        " width="+data[i]["width"]+" height="+data[i]["height"]+"></a>");
+                    $("#grid_" + counter).append("<a href="+data[i]["pdf_path"]+"><h4>"+html_name+"</h4></a><a href="+data[i]["pdf_path"]+"><img id=img_"+true_count+" src="+data[i]["png_path"]+" width="+data[i]["width"]+" height="+data[i]["height"]+"></a>");
+                    true_count++;
                     counter++;
                 }
             }
@@ -270,49 +304,12 @@
 
     <body>
 
-        <!-- Navbar -->
-<!--        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <form class="navbar-form navbar-left">
-                        <div class="form-group">
-                        </div>
-                    </form>
-                    <form class="navbar-form navbar-right">
-                        <div class="form-group">
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        </nav> -->
-
-<!--        
-        <div class="jumbotron jumbotron-billboard">
-            <div id="jumbo" class="main"></div>
-            <p><br /><p>
-            <div class="container">
-                <h1>AutoPlotter</h1>
-                <p>Click on any of the thumbnails below to view the full pdf of your plot or click the button below to view the source code for AutoPlotter.</p>
-                <p><a class="btn btn-primary btn-lg" href="http://github.com/jkguiang/AutoPlotter" role="button">Github &raquo;</a></p>
-            </div>
-        </div> -->
-
         <div class="container-fluid">
             <div class="row">
                 <!-- Side Navbar -->
                 <div class="col-md-3">
                     <div class="sidebar-nav-fixed sidebar-nav-fixed affix">
                         <div class="well well-image">
-                            <div id="well" class="bg"></div>
                             <h4>AutoPlotter</h4>
                             <div class="text-center">
                                 <form>
@@ -325,6 +322,14 @@
                                 </form>
                                 <a style="z-index: auto; position: relative;" class="btn btn-primary btn-sm" href="http://github.com/jkguiang/AutoPlotter" role="button">Github &raquo;</a>
                             </div>
+                        </div>
+                        <div class="well">
+                            <div class="text-center">
+                                <img id="preview" class="img-thumbnail" src="" alt="Hover over a thumbnail to get preview here" width=200 height=300>
+                            </div>
+                        </div>
+                        <div class="well">
+                            <div id="tooltip" class="tooltip-txt"></div>
                         </div>
                     </div>
                 </div>

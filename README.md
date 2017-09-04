@@ -9,6 +9,8 @@ Example: http://uaf-8.t2.ucsd.edu/~jguiang/AutoPlotter
 3. Easily share search outputs with unique search URL's
 4. Zoom slider for resizing thumbnails
     * If your page is too crowded, just set the slider to 0 to get a handy, still searchable list of your files
+5. Dynamic preview display for getting quick accces to vital histogram information
+    * Include a .txt file in the /txts directory to link it to a histogram with the same name (i.e. `foo.txt` will be displayed whn the user mouses over `foo.png`)
 
 ## Reviews:
 ###### Jonathan Guiang
