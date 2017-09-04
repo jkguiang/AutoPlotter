@@ -20,13 +20,14 @@ Example: http://uaf-8.t2.ucsd.edu/~jguiang/AutoPlotter
 > AutoPlotter is so easy to use, every experimental physicist should be using this!
 
 ## Using AutoPlotter:
-#### Setting up a AutoPlotter page
+#### Setting up an AutoPlotter page
 1. Clone this repository
 2. Ensure you are on a system that supports public .html dumps
 3. Run the bash script:
 ```
     # Make sure to pass both the 'setup' command as well as the name of the 
     # directory you wish to use (AutoPlotter creates the directory for you)
+
     ./run.sh setup new_dirname
 ```
 
@@ -34,5 +35,6 @@ Example: http://uaf-8.t2.ucsd.edu/~jguiang/AutoPlotter
 ```
     # This time, pass the 'updt' command, the name of the directory you wish 
     # to update, and the name of the directory you are pulling files from
+
     ./run.sh updt new_dirname ~/home/users/user_name/target_dirname
 ```
