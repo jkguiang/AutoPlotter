@@ -33,7 +33,7 @@ setup(){
             mkdir ${aplot}/${2}/pngs
             mkdir ${aplot}/${2}/txts
             curl https://raw.githubusercontent.com/jkguiang/AutoPlotter/master/index.php > ${aplot}/${2}/index.php
-            curl https://github.com/jkguiang/AutoPlotter/blob/master/favicon.ico > ${aplot}/${2}/favicon.ico
+            curl https://raw.githubusercontent.com/jkguiang/AutoPlotter/master/favicon.ico > ${aplot}/${2}/favicon.ico
             echo "Added ${2}."
         fi
         
@@ -111,6 +111,9 @@ if [[ -e ${1} ]] ; then
         fi
         if [[ ! -e ${html}/autoplotter ]] ; then
             mkdir ${html}/autoplotter
+            curl https://raw.githubusercontent.com/jkguiang/AutoPlotter/master/main.php > ${html}/autoplotter/index.php
+            curl https://raw.githubusercontent.com/jkguiang/AutoPlotter/master/main.js > ${html}/autoplotter/main.js
+            curl https://raw.githubusercontent.com/jkguiang/AutoPlotter/master/favicon.ico > ${html}/autoplotter/favicon.ico
         fi
         setup ${html} ${targ}
         updt ${html}/autoplotter/${targ} ${orig} 
