@@ -20,7 +20,7 @@ There are a lot of other plotters out there, but our reviews speak for themselve
 ## Using AutoPlotter:
 #### Setting up an AutoPlotter page
 1. Clone this repository
-2. Ensure you are on a system that supports public html dumps
+2. Ensure you are on the UCSD's Tier-2 server. 
 3. Run `aplot`, passing the directory with the files (.pdfs only) that you wish to plot
 ```
     >>> aplot <dirname>
