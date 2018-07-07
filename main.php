@@ -10,6 +10,33 @@
         <!-- Tab Icon -->
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
+        <!-- CSS -->
+        <style>
+        .jumbotron-billboard .cms {
+            margin-bottom: 0px;
+            opacity: 0.2;
+            color: #fff;
+            background: #000 url("cms.jpg") center center;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            overflow: hidden;
+
+
+            position:absolute;
+            top:0;left:0;
+            z-index:1;
+        }
+        .jumbotron {position:relative;padding:50px;}
+        .jumbotron .container {z-index:2;
+            position:relative;
+            z-index:2;
+        }
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        </style>
 
         <!-- PHP -->
         <?php
@@ -59,6 +86,7 @@
 
     <body>
         <div class="jumbotron jumbotron-billboard">
+            <div class="cms"></div>
             <p><br /></p>
             <div class="container">
                 <h1>AutoPlotter</h1>
