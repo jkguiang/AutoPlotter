@@ -1,8 +1,6 @@
 # AutoPlotter
 There are a lot of other plotters out there, but our reviews speak for themselves: AutoPlotter is the new craze! Clone this repository to start using AutoPlotter today! **_AutoPlotter: Simple, stunning, smart._**
 
-Example: http://uaf-8.t2.ucsd.edu/~jguiang/AutoPlotter
-
 ## Features:
 1. Beautiful Bootstrap-based UI
 2. Quick search function with search highlights
@@ -28,3 +26,7 @@ Example: http://uaf-8.t2.ucsd.edu/~jguiang/AutoPlotter
     >>> aplot <dirname>
 ```
 It's as easy as that! AutoPlotter takes care of the rest for you and, when it's finished, it will provide the link to your new plots.
+
+Examples: 
+1. http://uaf-8.t2.ucsd.edu/~jguiang/autoplotter/z_peak
+2. http://uaf-8.t2.ucsd.edu/~jguiang/autoplotter/some_plots
