@@ -23,7 +23,7 @@ There are a lot of other plotters out there, but our reviews speak for themselve
 2. Ensure you are on the UCSD's Tier-2 server. 
 3. Run `aplot`, passing the directory with the files (.pdfs only) that you wish to plot
 ```
-    >>> aplot <dirname>
+    >>> aplot <origin_directory> <optional_target>
 ```
 It's as easy as that! AutoPlotter takes care of the rest for you and, when it's finished, it will provide the link to your new plots.
 
