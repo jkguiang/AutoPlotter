@@ -114,6 +114,7 @@ if [[ -e ${1} ]] ; then
             curl https://raw.githubusercontent.com/jkguiang/AutoPlotter/master/main.php > ${html}/autoplotter/index.php
             curl https://raw.githubusercontent.com/jkguiang/AutoPlotter/master/main.js > ${html}/autoplotter/main.js
             curl https://raw.githubusercontent.com/jkguiang/AutoPlotter/master/favicon.ico > ${html}/autoplotter/favicon.ico
+            curl https://home.cern/sites/home.web.cern.ch/files/image/update-for_the_public/2015/01/cms.jpg > ${html}/autoplotter/cms.jpg
         fi
         setup ${html} ${targ}
         updt ${html}/autoplotter/${targ} ${orig} 
