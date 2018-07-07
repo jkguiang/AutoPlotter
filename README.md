@@ -27,3 +27,4 @@ Example: http://uaf-8.t2.ucsd.edu/~jguiang/AutoPlotter
 ```
     >>> aplot <dirname>
 ```
+It's as easy as that! AutoPlotter takes care of the rest for you and, when it's finished, it will provide the link to your new plots.
