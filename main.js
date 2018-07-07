@@ -58,7 +58,8 @@ function load_page(php_out) {
             results_exist = true;
             var html_name = highlight_search(val["name"]);
 
-            to_append += "<div class'container' id='"+val["name"]+"'><hr><p><h4><a href='"+cur_url+val["name"]+"'>"+html_name+"</a></h4></p><hr>";
+            to_append += "<div class'container' id='"+val["name"]+"'><hr><p><h4><a href='"+cur_url+val["name"]+"'>"+html_name+" ("+val["count"]+" Files)</a></h4></p>"
+                        +"<img id='"+val["img"].split(".")[0]+"' src='"+val["img"]+"' width='"+val["img_width"]+"' height='"+val["img_height"]+"'><hr></div>";
         }
     });
     if (results_exist == false) {
@@ -74,9 +75,17 @@ function make_json(php_out) {
     for (var i = 0; i < php_out.length; i++) {
         var dir_obj = php_out[i];
         var name = dir_obj["name"];
+        var count = dir_obj["count"];
+        var img = dir_obj["img"];
+        var img_width = dir_obj["img_width"];
+        var img_height = dir_obj["img_height"];
 
         new_json.push({
             "name": name,
+            "count": count,
+            "img": img,
+            "img_width": 0.5*Number(img_width),
+            "img_height": 0.5*Number(img_height),
         });
 
     }                

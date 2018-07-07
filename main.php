@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Star Database</title>
+        <title>AutoPlotter</title>
         <!-- Latest version of JQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -15,12 +15,14 @@
         <?php
             $dirs = array();
 
-            function newDir($dir_name, $file_count, $img_path) {
+            function newDir($dir_name, $file_count, $img_path, $width, $height) {
                 global $dirs;
                 $new_dir = array(
                     "name" => $dir_name,
                     "count" => $file_count,
                     "img" => $img_path,
+                    "img_width" => $width,
+                    "img_height" => $height,
                 );
 
                 $dirs[] = $new_dir;
@@ -34,11 +36,13 @@
                 $dir_name = $dir_list[$i];
                 if ($dir_name != '.' && $dir_name !='..') {
                     if (count(explode(".", $dir_name)) == 1) { 
-                        $png_path = ($cwd . "/" . $dir_name . "/pngs");
+                        $png_path = ($dir_name . "/pngs");
 
                         $file_count = count(scandir($cwd . "/" . $dir_name . "/pdfs"));
-                        $img_path = scandir($png_path)[0];
-                        newDir($dir_name, $file_count, $img_path);
+                        $imgs = scandir($png_path);
+                        $img_path = ($png_path . "/" . $imgs[2]);
+                        list($width, $height) = getimagesize($img_path);
+                        newDir($dir_name, $file_count, $img_path, $width, $height);
                     }
                 }
             }
