@@ -42,7 +42,7 @@
         <?php
             $dirs = array();
 
-            function newDir($dir_name, $file_count, $img_path, $width, $height) {
+            function newDir($dir_name, $file_count, $img_path, $width, $height, $modified) {
                 global $dirs;
                 $new_dir = array(
                     "name" => $dir_name,
@@ -50,6 +50,7 @@
                     "img" => $img_path,
                     "img_width" => $width,
                     "img_height" => $height,
+                    "modified" => $modified,
                 );
 
                 $dirs[] = $new_dir;
@@ -69,7 +70,8 @@
                         $imgs = scandir($png_path);
                         $img_path = ($png_path . "/" . $imgs[2]);
                         list($width, $height) = getimagesize($img_path);
-                        newDir($dir_name, $file_count, $img_path, $width, $height);
+                        $modified = filemtime($img_path);
+                        newDir($dir_name, $file_count, $img_path, $width, $height, $modified);
                     }
                 }
             }
@@ -91,10 +93,19 @@
             <div class="container">
                 <h1>AutoPlotter</h1>
                 <p>Simple, stunning, smart.</p>
-                <form><input type="text" id="search" onkeyup="refresh()" placeholder="Enter directory name..." class="form-control"></form>
             </div>
         </div>
+        <div class="container">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <label for="search">Search</label>
+                <form><input type="text" id="search" name="search" onkeyup="refresh()" placeholder="Enter directory name..." class="form-control"></form>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+        <div class="container"><h2>Directories</h2></div>
         <div class="container" id="main_list"></div>
+        <div class="container"><hr></div>
     </body>
 
 </html>

@@ -58,8 +58,9 @@ function load_page(php_out) {
             results_exist = true;
             var html_name = highlight_search(val["name"]);
 
-            to_append += "<div class'container' id='"+val["name"]+"'><hr><p><h4><a href='"+cur_url+val["name"]+"'>"+html_name+" ("+val["count"]+" Files)</a></h4></p>"
-                        +"<img id='"+val["img"].split(".")[0]+"' src='"+val["img"]+"' width='"+val["img_width"]+"' height='"+val["img_height"]+"'><hr></div>";
+            to_append += "<div class='container' id='"+val["name"]+"'><hr><div class='col-sm-4'><div class='text-center'><p><h4><a href='"+cur_url+val["name"]+"'>"+html_name+"</a></h4></p>"
+                        +"<a href='"+cur_url+val["name"]+"'><img id='"+val["img"].split(".")[0]+"' src='"+val["img"]+"' width='"+val["img_width"]+"' height='"+val["img_height"]+"'></a></div></div>"
+                        +"<div class='col-sm-8'><p><h4>Properties</h4>Contains: "+val["count"]+" plots<br />Last modified: "+val["modified"]+"</p></div></div>";
         }
     });
     if (results_exist == false) {
@@ -79,6 +80,7 @@ function make_json(php_out) {
         var img = dir_obj["img"];
         var img_width = dir_obj["img_width"];
         var img_height = dir_obj["img_height"];
+        var modified = new Date(Number(dir_obj["modified"]*1000));
 
         new_json.push({
             "name": name,
@@ -86,6 +88,7 @@ function make_json(php_out) {
             "img": img,
             "img_width": 0.5*Number(img_width),
             "img_height": 0.5*Number(img_height),
+            "modified": modified,
         });
 
     }                
