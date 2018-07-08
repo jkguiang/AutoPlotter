@@ -1,6 +1,11 @@
 # AutoPlotter
 There are a lot of other plotters out there, but our reviews speak for themselves: AutoPlotter is the new craze! Clone this repository to start using AutoPlotter today! **_AutoPlotter: Simple, stunning, smart._**
 
+#### Content:
+1. [Features](https://github.com/jkguiang/AutoPlotter#features)
+2. [Reviews](https://github.com/jkguiang/AutoPlotter#reviews)
+3. [Using AutoPlotter](https://github.com/jkguiang/AutoPlotter#using-autoplotter)
+
 ## Features:
 1. Beautiful Bootstrap-based UI
 2. Quick search function with search highlights
