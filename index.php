@@ -191,6 +191,7 @@
                     });
                 }                
                 
+                console.log(new_json);
                 return new_json;
             }
 
@@ -245,7 +246,7 @@
                     toappend += "<div class='row'>";
                     toappend += "   <div class='text-center'>"
                     for (var j = 0; j < 3; j++){
-                        if (counter > data.length) return;
+                        if (counter > data.length+1) return;
                         toappend +=     ("<div id=grid_" + (i + j) + " class='col-lg-4'></div>");
                         counter++;
                     }
@@ -262,6 +263,7 @@
 
                 var true_count = 0;
                 for (var i = 0; i < data.length; i++) {
+                    console.log(data[i]["name"]);
                     if (data[i]["hidden"]) {
                         true_count++;
                         continue;
