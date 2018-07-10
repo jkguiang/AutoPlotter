@@ -60,7 +60,7 @@ function load_page(php_out) {
 
             to_append += "<div class='container' id='"+val["name"]+"'><hr><div class='col-sm-4'><div class='text-center'><p><h4><a href='"+cur_url+val["name"]+"'>"+html_name+"</a></h4></p>"
                         +"<a href='"+cur_url+val["name"]+"'><img id='"+val["img"].split(".")[0]+"' src='"+val["img"]+"' width='"+val["img_width"]+"' height='"+val["img_height"]+"'></a></div></div>"
-                        +"<div class='col-sm-8'><p><h4>Properties</h4>Contains: "+val["count"]+" plots<br />Last modified: "+val["modified"]+"</p></div></div>";
+                        +"<div class='col-sm-8'><p><h4>Properties</h4>Contains: "+val["count"]+" plot(s)<br />Last modified: "+val["modified"]+"</p></div></div>";
         }
     });
     if (results_exist == false) {
