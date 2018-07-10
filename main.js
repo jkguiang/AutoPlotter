@@ -64,7 +64,12 @@ function load_page(php_out) {
         }
     });
     if (results_exist == false) {
-        div.append("<div class='container text-center'><p>No entries matching '"+search+"' exist.</p></div>")
+        if (data.length == 0) {
+            div.append("<div class='container text-center'><p>No entries exist.</p></div>")
+        }
+        else {
+            div.append("<div class='container text-center'><p>No entries matching '"+search+"' exist.</p></div>")
+        }
     }
     div.append(to_append);
 
