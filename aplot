@@ -101,6 +101,7 @@ updt(){
 
 html=/home/users/${USER}/public_html
 
+
 if [[ -e ${1} ]] ; then
     if [[ -d ${1} ]] ; then
         to_orig=$(cd "$(dirname "$1")"; pwd -P)
@@ -127,10 +128,26 @@ if [[ -e ${1} ]] ; then
         exit 0
     fi
 else
-    if [[ ${1} ]] ; then
-        echo "Error: ${1} does not exit."
+    if [[ "${1}" == "rm" ]] ; then
+        if [[ "${2}" != "" ]] ; then
+            if [[ ! -e ${html}/autoplotter/${2}  ]] ; then
+                echo "No entry named ${2} exists in ${html}/autoplotter."
+                exit 0
+            else
+                rm -rf ${html}/autoplotter/${2}
+                echo "Removed ${2}."
+                exit 0
+            fi
+        else
+            echo "Usage: aplot rm <target_directory>"
+            exit 0
+        fi
     else
-        echo "Usage: aplot <origin_directory> <optional_target>"
+        if [[ ${1} ]] ; then
+            echo "Error: ${1} does not exit."
+        else
+            echo "Default Usage: aplot <origin_directory> <optional_target>"
+        fi
+        exit 0
     fi
-    exit 0
 fi
