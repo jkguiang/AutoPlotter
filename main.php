@@ -66,7 +66,7 @@
                     if (count(explode(".", $dir_name)) == 1) { 
                         $png_path = ($dir_name . "/pngs");
 
-                        $file_count = count(scandir($cwd . "/" . $dir_name . "/pdfs"));
+                        $file_count = (count(scandir($cwd . "/" . $dir_name . "/pdfs")) - 2);
                         $imgs = scandir($png_path);
                         $img_path = ($png_path . "/" . $imgs[2]);
                         list($width, $height) = getimagesize($img_path);
