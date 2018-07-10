@@ -107,7 +107,12 @@ if [[ -e ${1} ]] ; then
         to_orig=$(cd "$(dirname "$1")"; pwd -P)
         targ=$(basename ${1})
         orig=${to_orig}/${targ}
+        if [[ -e ${1}/.aplot ]] ; then
+            targ=$(cat ${1}/.aplot)
+        fi
         if [[ ${2} ]] ; then
+            touch ${1}/.aplot
+            echo ${2} > ${1}/.aplot
             targ=${2}
         fi
         if [[ ! -e ${html}/autoplotter ]] ; then
