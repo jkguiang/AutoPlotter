@@ -108,7 +108,19 @@ if [[ -e ${1} ]] ; then
         targ=$(basename ${1})
         orig=${to_orig}/${targ}
         if [[ -e ${1}/.aplot ]] ; then
-            targ=$(cat ${1}/.aplot)
+            while true; do
+                echo "Overwrite ${targ}? (y/n): "
+                read resp
+                if [[ "${resp}" == "n" ]] ; then
+                    echo "Please enter a new target directory name, then hit ENTER: "
+                    read new_name
+                    targ=${new_name}
+                    break
+                elif [[ "${resp}" == "y" ]] ; then
+                    targ=$(cat ${1}/.aplot)
+                    break
+                fi
+            done
         fi
         if [[ ${2} ]] ; then
             touch ${1}/.aplot
