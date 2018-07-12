@@ -12,6 +12,9 @@
         <!-- Slider -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/css/bootstrap-slider.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.1/bootstrap-slider.min.js"></script>
+
+        <!-- Tab Icon -->
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
  
         <!-- My Code -->
         
