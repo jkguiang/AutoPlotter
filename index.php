@@ -176,7 +176,12 @@
                     var txt_path = img_obj["txt_path"];
                     var width = img_obj["width"];
                     var height = img_obj["height"];
+                    /* var container_width = $("#section_1").width(); */
+                    /* var aspect_ratio = height/width; */
+                    /* var img_width = container_width/3; */
+                    /* var img_height = img_width*aspect_ratio; */
                     var name = png_path.split('/').reverse()[0].split('.')[0];
+
 
                     // Get divisor for image dimensions
                     var div = get_div(Math.max(width, height));
@@ -241,30 +246,32 @@
                 var counter = 0;
 
                 container.html("");
+                var toappend = "";
 
                 for (var i = 0; i < data.length; i+=3) {
-                    var toappend = "";
 
                     //Draw thumbnails
                     toappend += "<div class='row'>";
-                    toappend += "   <div class='text-center'>"
                     for (var j = 0; j < 3; j++){
                         if (counter > data.length+1) return;
-                        toappend +=     ("<div id=grid_" + (i + j) + " class='col-lg-4'></div>");
+                        toappend +=     ("<div id=grid_" + (i + j) + " class='col-sm-4 text-center'></div>");
                         counter++;
                     }
-                    toappend += "   </div>"
                     toappend += "</div>";
-                    container.append(toappend);
                 }
+                container.append(toappend);
             }
 
             function fill_grid(data) {
+
+                $("#content").html("");
+                $("#content").append("<row>");
 
                 var counter = 0;
                 var new_search = "";
 
                 var true_count = 0;
+                var grid = [];
                 for (var i = 0; i < data.length; i++) {
                     console.log(data[i]["name"]);
                     if (data[i]["hidden"]) {
@@ -295,14 +302,16 @@
                     }
 
 
-                    $("#grid_" + counter).append("<a href="+data[i]["pdf_path"]+"><h4>"+html_name+"</h4></a><a href="+data[i]["pdf_path"]+"><img id=img_"+true_count+" src="+data[i]["png_path"]+" width="+data[i]["width"]+" height="+data[i]["height"]+"></a>");
+                    grid.push("<div style='display:inline-block'><a href="+data[i]["pdf_path"]+"><h4>"+html_name+"</h4><img id=img_"+true_count+" src="+data[i]["png_path"]+" width="+data[i]["width"]+" height="+data[i]["height"]+"></a></div>");
                     true_count++;
                     counter++;
                 }
+                $("#content").append(...grid);
+                $("#content").append("</row>");
             }
 
             function fill_sections(data) {
-                set_grid(data);
+                //set_grid(data);
                 fill_grid(data);
             }
 
@@ -311,12 +320,13 @@
 
     <body>
 
-        <div class="container-fluid">
+        <div class="container-fluidi">
             <div class="row">
-                <!-- Side Navbar -->
+                <!-- Tooltip -->
                 <div class="col-md-3">
-                    <div class="sidebar-nav-fixed sidebar-nav-fixed affix">
-                        <div class="well well-image">
+                    <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="well">
                             <h4>AutoPlotter</h4>
                             <div class="text-center">
                                 <form>
@@ -330,31 +340,42 @@
                                 <a style="z-index: auto; position: relative;" class="btn btn-primary btn-sm" href=<?php echo $_SERVER['HTTP_REFERER'] ?> role="button">&laquo; Back</a>
                             </div>
                         </div>
+
                         <div class="well">
                             <div class="text-center">
                                 <img id="preview" class="img-thumbnail" src="" alt="Hover over a thumbnail to get preview here" width=200 height=300>
                             </div>
                         </div>
+
                         <div class="well">
                             <div id="tooltip" class="tooltip-txt"></div>
                         </div>
                     </div>
-                </div>
+                    </div>
 
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                </div>
+                <!-- Images -->
+                <div class="col-md-9">
+
                     <!-- Images -->
-                    <div id="section_1" class="container">
-                    </div><!-- /.container -->
+                    <div class="row">
+                        <!-- <div id="section_1" class="container">
+                        </div> -->
+                        <div id="content" class="d-flex flex-wrap">
+                        </div><!-- /.container -->
+                    </div>
 
                     <!-- Footer -->
-                    <div class="container">
+                    <div class="row">
                         <hr> <!-- thin, grey horizontal line -->
                         <footer>
                             <p>Made by Jonathan Guiang 2017</p>
                         </footer>
                     </div>
+
                 </div>
             </div>
-        </div>
+        </div>        
+
     </body>
 </html>
