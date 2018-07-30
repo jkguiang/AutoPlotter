@@ -337,7 +337,7 @@
                                         <input id="slider" type="text" data-slider-ticks="[0, 100, 200]" data-slider-ticks-snap-bounds="5" data-slider-ticks-labels='["0%", "100%", "200%"]' data-slider-value="100"/>
                                     </div>
                                 </form>
-                                <a style="z-index: auto; position: relative;" class="btn btn-primary btn-sm" href=<?php echo $_SERVER['HTTP_REFERER'] ?> role="button">&laquo; Back</a>
+                                <a style="z-index: auto; position: relative;" class="btn btn-primary btn-sm" href=<?php echo dirname(dirname($_SERVER['PHP_SELF'])) ?> role="button">&laquo; Back</a>
                             </div>
                         </div>
 
@@ -354,8 +354,9 @@
                     </div>
 
                 </div>
+                <div class="col-md-1"></div>
                 <!-- Images -->
-                <div class="col-md-9">
+                <div class="col-md-8">
 
                     <!-- Images -->
                     <div class="row">
