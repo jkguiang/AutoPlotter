@@ -96,20 +96,22 @@
 
             
             // Fill JSON
-            $txt_offset = 0;
             for ($i = 0; $i < count($pngs); $i++) {
-                $png_name = explode(".", $pngs[$i]);
-                $pdf_name = explode(".", $pdfs[$i]);
-                $txt_name = explode(".", $txts[$i - $txt_offset]);
-                if ($png_name[0] != $pdf_name[0]) continue;
                 if ($pngs[$i] == '.' || $pngs[$i] == '..') continue;
-                list($width, $height) = getimagesize($cwd . "/" . $png_path . "/" . $pngs[$i]);
-                if ($png_name[0] != $txt_name[0]) {
-                    newImage($png_path . $pngs[$i], $pdf_path . $pdfs[$i], "None", $width, $height);
-                    $txt_offset++;
-                    continue;
+                $name = explode(".", $pngs[$i]);
+                $new_pdf = "";
+                $new_txt = "None";
+                $pdf_hyp = $name[0] . ".pdf";
+                $txt_hyp = $name[0] . ".txt";
+                if (in_array($pdf_hyp, $pdfs)) {
+                    $new_pdf = $pdf_path . $pdf_hyp;
                 }
-                newImage($png_path . $pngs[$i], $pdf_path . $pdfs[$i], $txt_path . $txts[$i - $txt_offset], $width, $height);
+                if (in_array($txt_hyp, $pdfs)) {
+                    $new_txt = $txt_path . $txt_hyp;
+                }
+                list($width, $height) = getimagesize($cwd . "/" . $png_path . "/" . $pngs[$i]);
+                $new_png = $png_path . $pngs[$i];
+                newImage($new_png, $new_pdf, $new_txt, $width, $height);
             }
 
         ?>
