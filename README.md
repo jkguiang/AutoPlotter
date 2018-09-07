@@ -1,5 +1,6 @@
 # AutoPlotter
-[![CodeFactor](https://www.codefactor.io/repository/github/jkguiang/autoplotter/badge)](https://www.codefactor.io/repository/github/jkguiang/autoplotter)
+
+[![CodeFactor](https://www.codefactor.io/repository/github/jkguiang/autoplotter/badge/master)](https://www.codefactor.io/repository/github/jkguiang/autoplotter/overview/master)
 
 There are a lot of other plotters out there, but our reviews speak for themselves: AutoPlotter is the new craze! Clone this repository to start using AutoPlotter today! **_AutoPlotter: Simple, stunning, smart._**
 
