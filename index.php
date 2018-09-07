@@ -134,7 +134,7 @@
             function load_page(php_out) {
                 var data = make_json(php_out);
                 filter(data);
-                fill_sections(data);
+                fill_grid(data);
                 $('[id^=img_]').mouseenter(
                     function() {
                         // Dynamic Well Preview
@@ -246,27 +246,6 @@
                 return data;
             }
 
-            function set_grid(data) {
-                var container = $("#section_1");
-                var counter = 0;
-
-                container.html("");
-                var toappend = "";
-
-                for (var i = 0; i < data.length; i+=3) {
-
-                    //Draw thumbnails
-                    toappend += "<div class='row'>";
-                    for (var j = 0; j < 3; j++){
-                        if (counter > data.length+1) return;
-                        toappend +=     ("<div id=grid_" + (i + j) + " class='col-sm-4 text-center'></div>");
-                        counter++;
-                    }
-                    toappend += "</div>";
-                }
-                container.append(toappend);
-            }
-
             function fill_grid(data) {
 
                 $("#content").html("");
@@ -313,11 +292,6 @@
                 }
                 $("#content").append(...grid);
                 $("#content").append("</row>");
-            }
-
-            function fill_sections(data) {
-                //set_grid(data);
-                fill_grid(data);
             }
 
         </script>
