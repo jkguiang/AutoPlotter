@@ -106,6 +106,9 @@
                 if (in_array($pdf_hyp, $pdfs)) {
                     $new_pdf = $pdf_path . $pdf_hyp;
                 }
+                else {
+                    $new_pdf = $png_path . $pngs[$i];
+                }
                 if (in_array($txt_hyp, $pdfs)) {
                     $new_txt = $txt_path . $txt_hyp;
                 }
